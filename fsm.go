@@ -280,11 +280,6 @@ func (f *FSM) Event(event string, args ...interface{}) error {
 		return err
 	}
 
-	if f.current == dst {
-		f.afterEventCallbacks(e)
-		return NoTransitionError{e.Err}
-	}
-
 	// Setup the transition, call it later.
 	f.transition = func() {
 		f.stateMu.Lock()
